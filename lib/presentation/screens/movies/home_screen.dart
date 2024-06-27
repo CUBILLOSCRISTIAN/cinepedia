@@ -1,6 +1,6 @@
-import 'package:cinepedia/presentation/providers/movies/movies_providers.dart';
-import 'package:cinepedia/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:cinepedia/presentation/providers/providers.dart';
+import 'package:cinepedia/presentation/widgets/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -12,6 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: _HomeView(),
+      bottomNavigationBar: CustomBottomNavigationbar(),
     );
   }
 }
@@ -34,10 +35,18 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
 
+    final slideshowMovies = ref.watch(moviesSlideshowProvider);
     return Column(
       children: [
         const CustomAppbar(),
-        MoviesSlideshow(movies: nowPlayingMovies),
+        MoviesSlideshow(movies: slideshowMovies),
+        MovieHorizontalListview(
+          movies: nowPlayingMovies,
+          title: 'En cines',
+          subTitle: 'Ver más',
+          loadNextPage: () =>
+              ref.read(nowPlayingMoviesProvider.notifier).loadNextPage(),
+        )
       ],
     );
   }
