@@ -167,7 +167,7 @@ class _Title extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final titleStyle = Theme.of(context).textTheme.titleLarge;
+    final titleStyle = Theme.of(context).textTheme.titleMedium;
 
     return Container(
       padding: const EdgeInsets.only(top: 10),
