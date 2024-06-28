@@ -39,6 +39,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   Widget build(BuildContext context) {
     final initialLoading = ref.watch(initialLoadingProvider);
 
+    Future.delayed(const Duration(minutes: 1));
+
     final slideshowMovies = ref.watch(moviesSlideshowProvider);
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
     final popularMovies = ref.watch(popularMoviesProvider);

@@ -59,16 +59,42 @@ class _Slide extends StatelessWidget {
         decoration: decoration,
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
-          child: Image.network(
-            movie.backdropPath,
-            fit: BoxFit.cover,
-            loadingBuilder: (context, child, loadingProgress) {
-              if (loadingProgress != null) {
-                return const DecoratedBox(
-                    decoration: BoxDecoration(color: Colors.black12));
-              }
-              return FadeIn(child: child);
-            },
+          child: Stack(
+            children: [
+              Image.network(
+                movie.backdropPath,
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress != null) {
+                    return const DecoratedBox(
+                      decoration: BoxDecoration(color: Colors.black12),
+                    );
+                  }
+                  return FadeIn(child: child);
+                },
+              ),
+              Positioned(
+                bottom: 20,
+                left: 10,
+                child: Text(
+                  movie.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 20.0,
+                        color: Colors.black,
+                        offset: Offset(2.0, 2.0),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
