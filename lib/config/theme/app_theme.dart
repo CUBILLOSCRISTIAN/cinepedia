@@ -10,10 +10,7 @@ class AppTheme {
         colorSchemeSeed: const Color(0xFFE50914),
       );
 
-  AppTheme copyWith({
-    bool? isDarkMode,
-  }) =>
-      AppTheme(
+  AppTheme copyWith({bool? isDarkMode}) => AppTheme(
         isDarkMode: isDarkMode ?? this.isDarkMode,
       );
 }

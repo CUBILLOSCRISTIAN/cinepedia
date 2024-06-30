@@ -29,6 +29,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   void initState() {
     super.initState();
+    ref.read(initialLoadingProvider);
     ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
     ref.read(popularMoviesProvider.notifier).loadNextPage();
     ref.read(topRatedMoviesProvider.notifier).loadNextPage();
@@ -38,8 +39,6 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   @override
   Widget build(BuildContext context) {
     final initialLoading = ref.watch(initialLoadingProvider);
-
-    Future.delayed(const Duration(minutes: 1));
 
     final slideshowMovies = ref.watch(moviesSlideshowProvider);
     final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
@@ -56,6 +55,8 @@ class _HomeViewState extends ConsumerState<_HomeView> {
             floating: true,
             flexibleSpace: FlexibleSpaceBar(
               title: CustomAppbar(),
+              titlePadding: EdgeInsets.zero,
+              centerTitle: false,
             ),
           ),
           SliverList(
