@@ -105,20 +105,23 @@ class _MovieDetails extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8),
-          child: Wrap(
-            children: [
-              ...movie.genreIds.map(
-                (gender) => Container(
-                  margin: const EdgeInsets.only(right: 10),
-                  child: Chip(
-                    label: Text(gender),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                ...movie.genreIds.map(
+                  (gender) => Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    child: Chip(
+                      label: Text(gender),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
         _ActorsByMovie(movieId: movie.id.toString()),
@@ -159,7 +162,7 @@ class _ActorsByMovie extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                //Photo Actor
+                // Photo Actor
                 FadeInRight(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
@@ -174,18 +177,30 @@ class _ActorsByMovie extends ConsumerWidget {
                 const SizedBox(
                   height: 5,
                 ),
-                Text(
-                  actor.name,
-                  maxLines: 2,
+                SizedBox(
+                  width: 135, // Mismo ancho que la imagen
+                  child: Text(
+                    actor.name,
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ),
-                Text(
-                  actor.character ?? '',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                  softWrap: false,
-                  style: const TextStyle(
+                SizedBox(
+                  width: 135, // Mismo ancho que la imagen
+                  child: Text(
+                    actor.character ?? '',
+                    maxLines: 2,
+                    softWrap: true,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      overflow: TextOverflow.ellipsis),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
                 ),
               ],
             ),
